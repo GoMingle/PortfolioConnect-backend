@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 // Use routes
-app.use();
+// app.use();
 // API DOCS
 expressOasGenerator.handleRequests();
 app.use((req,res) => res.redirect('/api-docs/'));
