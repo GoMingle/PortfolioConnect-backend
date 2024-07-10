@@ -3,6 +3,8 @@ import express from "express";
 import mongoose from "mongoose";
 import expressOasGenerator from "express-oas-generator";
 import { dbconnection } from "./config/db.js";
+import { userRouter } from "./routes/user_route.js";
+
 
 
 // Connect to express app
@@ -17,6 +19,7 @@ dbconnection();
 
 app.use(express.json());
 app.use(cors());
+app.use('/api/v1', userRouter)
 
 // Use routes
 // app.use();

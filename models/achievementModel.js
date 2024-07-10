@@ -1,6 +1,6 @@
 import { Schema, model, Types } from "mongoose";
 
-const acheivementSchema = new Schema(
+const achievementSchema = new Schema(
      
         {
             award: {type: String},
@@ -13,4 +13,4 @@ const acheivementSchema = new Schema(
     
 );
 
-export const Achievement = model('Achievement', acheivementSchema);
+export const achievement = model('Achievement', achievementSchema);
