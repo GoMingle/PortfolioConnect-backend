@@ -1,7 +1,7 @@
 import { Schema, model, Types } from "mongoose";
 
 const experienceSchema = new Schema(
-     [
+     
         {
             companyName: {type: String},
             role: {type: String},
@@ -11,7 +11,7 @@ const experienceSchema = new Schema(
             endDate: {type: String},
             user: {type: Types.ObjectId, ref: 'User'}
         }
-    ]
+    
 );
 
 export const Experience = model('Experience', experienceSchema);
