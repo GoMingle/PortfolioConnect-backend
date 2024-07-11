@@ -8,6 +8,6 @@ export const userSchema = Joi.object({
     password: Joi.string().min(6).required(),
     confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
     userName: Joi.string().optional(),
-    termsAndConditions: Joi.optional(),
+    termsAndConditions: Joi.string().valid('Accept', 'Reject').required(),
 });
 

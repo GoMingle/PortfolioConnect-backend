@@ -8,11 +8,13 @@ export const userSchema = new Schema({
         email: { type: String, unique: true },
         password: { type: String },
         userName: { type: String },
-        termsAndConditions: {type: String},
+        termsAndConditions: {type: String, enum:['Accept', 'Reject']},
         githubLink: {type: String},
         linkedIn: {type: String},
         twitterLink: {type: String},
    
+},{
+        timestamps: true
 });
 
-export const User = model('User', userSchema);
+export const userModel = model('User', userSchema);
