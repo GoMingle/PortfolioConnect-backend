@@ -6,8 +6,7 @@ import MongoStore from "connect-mongo";
 import expressOasGenerator from "express-oas-generator";
 import { dbconnection } from "./config/db.js";
 import { userRouter } from "./routes/user_route.js";
-
-
+import { experienceRouter } from "./routes/experience_route.js";
 
 // Connect to express app
 const app = express();
@@ -37,6 +36,9 @@ app.use(session({
 // app.use();
 // API DOCS
 app.use('/api/v1', userRouter);
+app.use('/api/v1', experienceRouter);
+
+
 expressOasGenerator.handleRequests();
 app.use((req,res) => res.redirect('/api-docs/'));
 
