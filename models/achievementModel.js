@@ -13,4 +13,4 @@ const achievementSchema = new Schema(
     
 );
 
-export const achievement = model('Achievement', achievementSchema);
+export const Achievement = model('Achievement', achievementSchema);

@@ -14,4 +14,4 @@ const experienceSchema = new Schema(
     
 );
 
-export const experience = model('Experience', experienceSchema);
+export const Experience = model('Experience', experienceSchema);
