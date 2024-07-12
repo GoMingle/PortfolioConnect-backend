@@ -20,7 +20,7 @@ export const signUp = async(req, res, next) => {
         const hashedPassword = await bcrypt.hash(value.password, 12)
         value.password = hashedPassword;
         delete value.confirmPassword; // Remove confirmPassword field before storing
-        const addUser = await userModel.create(value)
+        const addUser = await UserModel.create(value)
         return res.status(201).send(addUser)
     }
    } catch (error) {
