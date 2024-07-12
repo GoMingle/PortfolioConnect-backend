@@ -9,4 +9,4 @@ const skillSchema = new Schema(
     }
 );
 
-export const experience = model('Skills', skillSchema);
+export const Skills = model('Skills', skillSchema);

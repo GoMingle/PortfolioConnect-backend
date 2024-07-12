@@ -14,4 +14,4 @@ export const profileSchema = new Schema({
     
 });
 
-export const profile = model('Profile', profileSchema);
+export const Profile = model('Profile', profileSchema);
