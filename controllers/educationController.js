@@ -1,4 +1,4 @@
-import { Education } from "../models/education_model.js";
+import { Education } from "../models/educationModel.js";
 import { User } from "../models/user_model.js";
 import { educationSchema } from "../schema/education_schema.js";
 

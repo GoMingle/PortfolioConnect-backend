@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { UserModel } from "../models/user_model.js";
+import { User } from "../models/user_model.js";
 import { userSchema } from "../schema/user_schema.js";
 
 
@@ -13,14 +13,14 @@ export const signUp = async(req, res, next) => {
     const email = value.email
     console.log('email', email)
 
-    const findIfUserExist = await UserModel.findOne({email})
+    const findIfUserExist = await User.findOne({email})
     if(findIfUserExist){
         return res.status(401).send('user has already signUp')
     } else{
         const hashedPassword = await bcrypt.hash(value.password, 12)
         value.password = hashedPassword;
         delete value.confirmPassword; // Remove confirmPassword field before storing
-        const addUser = await UserModel.create(value)
+        const addUser = await User.create(value)
         return res.status(201).send(addUser)
     }
    } catch (error) {
@@ -42,7 +42,7 @@ export const login = async (req, res, next) => {
       const { email, userName, password } = req.body;
   
       // Find user by email, username, or phone
-      const user = await UserModel.findOne({
+      const user = await User.findOne({
         $or: [
           { email: email },
           { userName: userName }
