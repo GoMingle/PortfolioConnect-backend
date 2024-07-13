@@ -5,4 +5,4 @@ export const checkUserSession = (req, res, next) => {
         res.status(401).json('no user session')
     }
 }
-}
+
