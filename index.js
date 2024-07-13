@@ -26,11 +26,18 @@ dbconnection();
 // middlewares
 app.use(express.json());
 app.use(cors());
+
+// Use routes
 app.use('/api/v1', userRouter);
 app.use(educationRouter);
 app.use(achievementRouter);
 app.use(userProfileRouter);
 app.use(volunteeringRouter);
+
+//Applying swagger documentation
+expressOasGenerator.handleRequests();
+app.use((req,res) => res.redirect('/api-docs/'));
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
