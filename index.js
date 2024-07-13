@@ -7,6 +7,11 @@ import expressOasGenerator from "express-oas-generator";
 import { dbconnection } from "./config/db.js";
 import { userRouter } from "./routes/user_route.js";
 import { experienceRouter } from "./routes/experience_route.js";
+import educationRouter from "./routes/education_route.js";
+import achievementRouter from "./routes/achievement_route.js";
+import userProfileRouter from "./routes/userProfile_route.js";
+import volunteeringRouter from "./routes/volunteering_route.js";
+
 
 // Connect to express app
 const app = express();
@@ -21,6 +26,11 @@ dbconnection();
 // middlewares
 app.use(express.json());
 app.use(cors());
+app.use('/api/v1', userRouter);
+app.use(educationRouter);
+app.use(achievementRouter);
+app.use(userProfileRouter);
+app.use(volunteeringRouter);
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -33,8 +43,6 @@ app.use(session({
 
 
 // Use routes
-// app.use();
-// API DOCS
 app.use('/api/v1', userRouter);
 app.use('/api/v1', experienceRouter);
 
