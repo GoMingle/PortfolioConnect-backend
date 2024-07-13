@@ -6,6 +6,7 @@ import MongoStore from "connect-mongo";
 import expressOasGenerator from "express-oas-generator";
 import { dbconnection } from "./config/db.js";
 import { userRouter } from "./routes/user_route.js";
+import { experienceRouter } from "./routes/experience_route.js";
 import educationRouter from "./routes/education_route.js";
 import achievementRouter from "./routes/achievement_route.js";
 import userProfileRouter from "./routes/userProfile_route.js";
@@ -46,6 +47,18 @@ app.use(session({
         mongoUrl: process.env.MONGO_URL
     })
 }));
+
+
+// Use routes
+app.use('/api/v1', userRouter);
+app.use('/api/v1', experienceRouter);
+
+
+expressOasGenerator.handleRequests();
+app.use((req,res) => res.redirect('/api-docs/'));
+
+
+
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
