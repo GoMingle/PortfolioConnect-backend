@@ -56,7 +56,7 @@ export const getOneAchievement = async (req, res) => {
 
 export const patchAchievement = async (req, res, next) => {
     try {
-        const updateAchievement = await Volunteering.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        const updateAchievement = await Achievement.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(updateAchievement);
     } catch (error) {
         next(error)

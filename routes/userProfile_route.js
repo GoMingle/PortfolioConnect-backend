@@ -4,9 +4,9 @@ import { Router } from "express";
 
 const userProfileRouter = Router()
 
-userProfileRouter.post('/users/achievement', checkUserSession, addProfile)
-userProfileRouter.get('/users/achievement', checkUserSession, getAllUserProfile)
-userProfileRouter.get('/users/education/:id', checkUserSession, getOneProfile)
-userProfileRouter.delete('/users/education/:id', checkUserSession, deleteOneProfile)
+userProfileRouter.post('/users/profile', checkUserSession, addProfile)
+userProfileRouter.get('/users/profile', checkUserSession, getAllUserProfile)
+userProfileRouter.get('/users/profile/:id', checkUserSession, getOneProfile)
+userProfileRouter.delete('/users/profile/:id', checkUserSession, deleteOneProfile)
 
 export default userProfileRouter;
