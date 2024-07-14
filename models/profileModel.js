@@ -10,6 +10,9 @@ export const profileSchema = new Schema({
         dateOfBirth: {type: String},
         contact: {type: String},
         language: [{type: String}],
+        githubLink: {type: String},
+        linkedIn: {type: String},
+        twitterLink: {type: String},
         user: {type: Types.ObjectId, ref: 'User'}
     
 });

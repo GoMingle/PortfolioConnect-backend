@@ -1,6 +1,6 @@
 import { Experience } from "../models/experienceModel.js";
 import { experienceSchema } from "../schema/experience_schema.js";
-import { UserModel } from "../models/user_model.js";
+import { User } from "../models/user_model.js";
 
 export const addExperience = async (req, res, next) => {
     try {
@@ -9,7 +9,7 @@ export const addExperience = async (req, res, next) => {
         return res.status(400).send(error.details[0].message)
     }
     // find specific user
-    const user = await UserModel.findById(value.user);
+    const user = await User.findById(value.user);
     if (!user) {
         return res.status(404).send('User not found');
     }

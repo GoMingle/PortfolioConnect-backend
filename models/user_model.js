@@ -9,9 +9,14 @@ export const userSchema = new Schema({
         password: { type: String },
         userName: { type: String },
         termsAndConditions: {type: String, enum:['Accept', 'Reject']},
-        githubLink: {type: String},
-        linkedIn: {type: String},
-        twitterLink: {type: String},
+        education: [{ type: Types.ObjectId, ref: 'Education' }],
+        skills: [{ type: Types.ObjectId, ref: 'Skills' }],
+        achievements: [{ type: Types.ObjectId, ref: 'Achievement' }],
+        projects: [{ type: Types.ObjectId, ref: 'Project' }],
+        userProfile: { type: Types.ObjectId, ref: 'UserProfile' },
+        volunteering: [{ type: Types.ObjectId, ref: 'Volunteering' }],
+        experiences: [{ type: Types.ObjectId, ref: 'Experience' }]
+    
    
 },{
         timestamps: true

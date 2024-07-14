@@ -4,10 +4,10 @@ import { Router } from "express";
 
 const volunteeringRouter = Router()
 
-volunteeringRouter.post('/users/achievement', checkUserSession, addVolunteering)
-volunteeringRouter.get('/users/achievement', checkUserSession, getAllUserVolunteering)
-volunteeringRouter.get('/users/education/:id', checkUserSession, getOneVolunteering)
-volunteeringRouter.patch('/users/education/:id', checkUserSession, patchVolunteering)
-volunteeringRouter.delete('/users/education/:id', checkUserSession, deleteOneVolunteering)
+volunteeringRouter.post('/users/volunteer', checkUserSession, addVolunteering)
+volunteeringRouter.get('/users/volunteer', checkUserSession, getAllUserVolunteering)
+volunteeringRouter.get('/users/volunteer/:id', checkUserSession, getOneVolunteering)
+volunteeringRouter.patch('/users/volunteer/:id', checkUserSession, patchVolunteering)
+volunteeringRouter.delete('/users/volunteer/:id', checkUserSession, deleteOneVolunteering)
 
 export default volunteeringRouter;
