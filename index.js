@@ -28,7 +28,7 @@ dbconnection();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({credentials:true, origin:'*'}));
 // Session configuration
 app.use(session({
     secret: process.env.SESSION_SECRET,
