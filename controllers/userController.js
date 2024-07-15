@@ -73,7 +73,7 @@ export const getUser = async (req, res, next) => {
     const userName = req.params.userName.toLowerCase();
 
   const options = { sort: { startDate: -1 } }
-  const userDetails = await User.findOne({ userName })
+  const userDetails = await User.findOne({ userName }).select("-password")
     .populate({
       path: "education",
       options,
