@@ -1,4 +1,5 @@
 import { Schema, model, Types } from "mongoose";
+import { toJSON } from "@reis/mongoose-to-json";
 
 const achievementSchema = new Schema(
      
@@ -9,8 +10,12 @@ const achievementSchema = new Schema(
             date: {type: String},
             nameOfInstitution: {type: String},
             user: {type: Types.ObjectId, ref: 'User'}
+        }, {
+            timestamps: true,
         }
     
 );
+
+achievementSchema.plugin(toJSON);
 
 export const Achievement = model('Achievement', achievementSchema);

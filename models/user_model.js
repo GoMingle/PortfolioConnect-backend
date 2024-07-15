@@ -1,4 +1,5 @@
 import { Schema, model, Types } from "mongoose";
+import { toJSON } from "@reis/mongoose-to-json";
 
 export const userSchema = new Schema({
     
@@ -21,5 +22,7 @@ export const userSchema = new Schema({
 },{
         timestamps: true
 });
+
+userSchema.plugin(toJSON);
 
 export const User = model('User', userSchema);
