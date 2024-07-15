@@ -19,6 +19,7 @@ import projectRouter from "./routes/project_route.js";
 const app = express();
 expressOasGenerator.handleResponses(app, {
     alwaysServeDocs: true,
+    tags: ['auth','Profile', 'Skills', 'Project', 'Volunteering', 'Experience', 'Education', 'Achievement'],
     mongooseModels: mongoose.modelNames(),
 });
 
