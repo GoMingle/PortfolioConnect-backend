@@ -1,13 +1,12 @@
-import { addAchievement, getAllUserAchievement, getOneAchievement, patchAchievement, deleteOneAchievement} from "../controllers/achievement_controller.js";
+import { createUserAchievement, getAllUserAchievements, updateUserAchievement, deleteUserAchievement} from "../controllers/achievement_controller.js";
 import { checkUserSession } from "../middlewares/auth.js";
 import { Router } from "express";
 
 const achievementRouter = Router()
 
-achievementRouter.post('/users/achievement', checkUserSession, addAchievement)
-achievementRouter.get('/users/achievement', checkUserSession, getAllUserAchievement)
-achievementRouter.get('/users/achievement/:id', checkUserSession, getOneAchievement)
-achievementRouter.patch('/users/achievement/:id', checkUserSession, patchAchievement)
-achievementRouter.delete('/users/achievement/:id', checkUserSession, deleteOneAchievement)
+achievementRouter.post('/users/achievements', checkUserSession, createUserAchievement)
+achievementRouter.get('/users/achievements', checkUserSession, getAllUserAchievements)
+achievementRouter.patch('/users/achievements/:id', checkUserSession, updateUserAchievement)
+achievementRouter.delete('/users/achievements/:id', checkUserSession, deleteUserAchievement)
 
 export default achievementRouter;
