@@ -1,6 +1,7 @@
 import { Project } from "../models/projectModel.js";
 import { projectSchema } from "../schema/project_schema.js";
 import { User } from "../models/user_model.js";
+import { Profile } from "../models/profileModel.js";
 
 export const addProject = async (req, res) => {
 

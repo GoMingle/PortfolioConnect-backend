@@ -7,11 +7,13 @@ import expressOasGenerator from "@mickeymond/express-oas-generator";
 import { dbconnection } from "./config/db.js";
 import { userRouter } from "./routes/user_route.js";
 import { experienceRouter } from "./routes/experience_route.js";
+import { skillRouter } from "./routes/skills.js";
 import educationRouter from "./routes/education_route.js";
 import achievementRouter from "./routes/achievement_route.js";
 import userProfileRouter from "./routes/userProfile_route.js";
 import volunteeringRouter from "./routes/volunteering_route.js";
 import projectRouter from "./routes/project_route.js";
+
 
 // Connect to express app
 const app = express();
@@ -44,6 +46,7 @@ app.use('/api/v1', achievementRouter);
 app.use('/api/v1', userProfileRouter);
 app.use('/api/v1', volunteeringRouter);
 app.use('/api/v1', projectRouter);
+app.use('/api/v1', skillRouter);
 
 
 // Applying swagger documentation
