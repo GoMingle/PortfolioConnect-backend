@@ -10,5 +10,5 @@ userRouter.post('/auth/signUp', signUp);
 userRouter.post('/auth/login', checkUserSession, login);
 userRouter.get('/auth/getUser', getUser);
 userRouter.get('/auth/getUsers', getUsers);
-userRouter.get('/auth/logout', logout);
+userRouter.post('/auth/logout', logout);
 
