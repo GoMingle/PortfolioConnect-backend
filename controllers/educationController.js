@@ -13,13 +13,18 @@ export const addEducation = async (req, res) => {
 
 
         //after, find the user with the id that you passed when creating the education 
-        const user = await User.findById(value.user);
+        console.log('userId', req.session.user.id)
+
+
+        const userSessionId = req.session.user.id
+
+        const user = await User.findById(userSessionId);
         if (!user) {
-            return res.status(404).send('User not found');
+            return res.status(404).send("User not found");
         }
 
         //create education with the value
-        const education = await Education.create(value);
+        const education = await Education.create({ ...value, user: userSessionId });
         //if you find the user, push the education id you just created inside
         user.education.push(education._id);
 
@@ -32,48 +37,68 @@ export const addEducation = async (req, res) => {
     } catch (error) {
         return res.status(500).send(error)
     }
-
 }
 
 
-
-export const getAllUserEducation = async (req, res) => {
-
+export const getAllUserEducation = async (req, res, next) => {
     try {
         //we are fetching education that belongs to a particular user
-        const userId = req.params.id
-        const alleducation = await Education.find({ user: userId })
+        const userSessionId = req.session.user.id
+        const alleducation = await Education.find({ user: userSessionId });
         if (alleducation.length == 0) {
             return res.status(404).send('No education added')
         }
         res.status(200).json({ education: alleducation })
     } catch (error) {
-
-    }
-
-}
-
-export const getOneEducation = async (req, res) => {
-
-    const education = await Education.findById(req.params.id)
-    res.status(200).json(education)
-
-}
-
-export const patchOneEducation = async (req, res, next) => {
-    try {
-        const updateEducation = await Education.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.json(updateEducation);
-    } catch (error) {
         next(error)
     }
 }
 
-export const deleteOneEducation = async (req, res, next) => {
+export const updateUserEducation = async (req, res) => {
     try {
-        const education = await Education.findByIdAndDelete(req.params.id);
-        res.status(200).json(education);
+        const { error, value } = educationSchema.validate(req.body);
+
+        if (error) {
+            return res.status(400).send(error.details[0].message);
+        }
+
+        const userSessionId = req.session.user.id;
+        const user = await User.findById(userSessionId);
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const Education = await Education.findByIdAndUpdate(req.params.id, value, { new: true });
+        if (!Education) {
+            return res.status(404).send("Education not found");
+        }
+
+        res.status(201).json({ Education });
     } catch (error) {
-        next(error);
+        return res.status(500).json({ error })
     }
-}
+};
+
+
+export const deleteUserEducation = async (req, res) => {
+    try {
+
+
+        const userSessionId = req.session.user.id;
+        const user = await User.findById(userSessionId);
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const education = await Education.findByIdAndDelete(req.params.id);
+        if (!education) {
+            return res.status(404).send("Education not found");
+        }
+
+        user.education.pull(req.params.id);
+        await user.save();
+        res.status(200).json("Education deleted");
+    } catch (error) {
+        return res.status(500).json({ error })
+    }
+};

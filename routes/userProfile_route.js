@@ -1,12 +1,29 @@
-import { addProfile, getAllUserProfile, getOneProfile, deleteOneProfile} from "../controllers/userProfileController.js";
+import { createUserProfile, getUserProfile, updateUserProfile } from "../controllers/userProfileController.js";
 import { checkUserSession } from "../middlewares/auth.js";
 import { Router } from "express";
+import { remoteUpload } from "../middlewares/upload.js";
 
 const userProfileRouter = Router()
 
-userProfileRouter.post('/users/profile', checkUserSession, addProfile)
-userProfileRouter.get('/users/profile', checkUserSession, getAllUserProfile)
-userProfileRouter.get('/users/profile/:id', checkUserSession, getOneProfile)
-userProfileRouter.delete('/users/profile/:id', checkUserSession, deleteOneProfile)
+userProfileRouter.get('/users/profile', checkUserSession, getUserProfile)
+userProfileRouter.post(
+    "/users/userProfile",
+    remoteUpload.fields([
+        { name: "profilePicture", maxCount: 1 },
+        { name: "resume", maxCount: 1 },
+    ]),
+    checkUserSession,
+    createUserProfile
+)
+
+userProfileRouter.patch(
+    "/users/userProfile/:id",
+    remoteUpload.fields([
+      { name: "profilePicture", maxCount: 1 },
+      { name: "resume", maxCount: 1 },
+    ]),
+    checkUserSession,
+    updateUserProfile
+  );
 
 export default userProfileRouter;
