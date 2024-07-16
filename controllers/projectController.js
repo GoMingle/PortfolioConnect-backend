@@ -11,15 +11,15 @@ export const addProject = async (req, res) => {
             return res.status(400).send(error.details[0].message)
         }
 
-        const userSessionId = req.session.user.id;
+        const userId = req.session?.user?.id || req?.user?.id;
         // find the loggedIn User
-        const user = await User.findById(userSessionId);
+        const user = await User.findById(userId);
         if (!user) {
             return res.status(404).send('User not found');
         }
 
         //create project with the value
-        const project = await Project.create({...value, user: userSessionId});
+        const project = await Project.create({...value, user: userId});
         //if you find the user, push the project id you just created inside
         user.projects.push(project._id);
 
@@ -40,8 +40,8 @@ export const getAllUserProject = async (req, res, next) => {
 
     try {
         // get all project that belongs to a particular user
-        const userSessionId = req.session.user.id
-        const allProject = await Project.find({ user: userSessionId })
+        const userId = req.session?.user?.id || req?.user?.id
+        const allProject = await Project.find({ user: userId })
         if (allProject.length == 0) {
             return res.status(404).send('No project added')
         }
@@ -71,8 +71,8 @@ export const patchProject = async (req, res) => {
         return res.status(400).send(error.details[0].message);
       }
   
-      const userSessionId = req.session.user.id; 
-      const user = await User.findById(userSessionId);
+      const userId = req.session?.user?.id || req?.user?.id; 
+      const user = await User.findById(userId);
       if (!user) {
         return res.status(404).send("User not found");
       }
