@@ -7,6 +7,6 @@ export const achievementSchema = Joi.object({
     image: Joi.string(),
     date: Joi.string(),
     nameOfInstitution: Joi.string(),
-    user: Joi.string().required(),
+    user: Joi.string(),
     
 });
