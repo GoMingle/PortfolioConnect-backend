@@ -8,5 +8,5 @@ export const volunteerSchema = Joi.object({
     skills: Joi.string().required(),
     startDate: Joi.string(),
     endDate: Joi.string(),
-    user: Joi.string().required(),
+    user: Joi.string(),
 });

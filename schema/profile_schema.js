@@ -10,5 +10,5 @@ export const profileSchema = Joi.object({
         dateOfBirth: Joi.string().required(),
         contact: Joi.string().required(),
         language: Joi.array().items(Joi.string()).required(),
-        user: Joi.string().required(),
+        user: Joi.string(),
 })
