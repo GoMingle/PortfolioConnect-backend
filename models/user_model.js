@@ -9,7 +9,7 @@ import { toJSON } from "@reis/mongoose-to-json";
         email: { type: String, lowercase: true, unique: true },
         password: { type: String },
         userName: { type: String, lowercase: true, unique: true },
-        termsAndConditions: {type: String, enum:['Accept', 'Reject']},
+        termsAndConditions: {type: Boolean},
         education: [{ type: Types.ObjectId, ref: 'Education' }],
         skills: [{ type: Types.ObjectId, ref: 'Skills' }],
         achievements: [{ type: Types.ObjectId, ref: 'Achievement' }],
