@@ -23,10 +23,10 @@ export const signUp = async (req, res, next) => {
     value.password = hashedPassword;
     delete value.confirmPassword; // Remove confirmPassword field before storing
 
-    const addUser = await User.create(value);
+    await User.create(value);
 
     // req.session.user = { id: addUser.id };
-    return res.status(201).send(addUser);
+    return res.status(201).send('Signed Up Successfully');
   } catch (error) {
     next(error);
   }
