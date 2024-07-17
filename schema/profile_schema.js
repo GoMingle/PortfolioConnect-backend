@@ -5,6 +5,7 @@ export const profileSchema = Joi.object({
         location: Joi.string(),
         bio: Joi.string(),
         contact: Joi.string().required(),
+        resume: Joi.string(),
         user: Joi.string(),
         githubLink: Joi.string(),
         linkedIn: Joi.string(),

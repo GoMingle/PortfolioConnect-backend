@@ -6,6 +6,7 @@ export const profileSchema = new Schema({
         location: {type: String},
         bio: {type: String},
         contact: {type: String},
+        resume: {type: String},
         githubLink: {type: String},
         linkedIn: {type: String},
         twitterLink: {type: String},
