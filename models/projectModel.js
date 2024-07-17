@@ -10,8 +10,9 @@ const projectSchema = new Schema(
             nameOfInstitution: {type: String},
             startDate: {type: String},
             endDate: {type: String},
+            image: {type: String},
+            link: {type: String},
             user: {type: Types.ObjectId, ref: 'User'},
-
         }, {
             timestamps: true,
         }
