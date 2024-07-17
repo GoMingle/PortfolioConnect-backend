@@ -8,7 +8,7 @@ export const userSchema = Joi.object({
     password: Joi.string().min(6).required(),
     confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
     userName: Joi.string().required(),
-    termsAndConditions: Joi.string().valid('Accept', 'Reject').required(),
+    termsAndConditions: Joi.boolean().optional(),
 });
 
 export const loginValidator = Joi.object({
