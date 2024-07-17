@@ -7,7 +7,6 @@ const educationSchema = new Schema(
             schoolName: { type: String },
             program: { type: String },
             qualification: { type: String },
-            grade: { type: String },
             location: { type: String },
             startDate: { type: String },
             endDate: { type: String },

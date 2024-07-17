@@ -11,3 +11,9 @@ export const userSchema = Joi.object({
     termsAndConditions: Joi.string().valid('Accept', 'Reject').required(),
 });
 
+export const loginValidator = Joi.object({
+    userName: Joi.string().alphanum(),
+    email: Joi.string().email(),
+    password: Joi.string().required(),
+});
+

@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import { User } from "../models/user_model.js";
 import { userSchema } from "../schema/user_schema.js";
+import { loginValidator } from '../schema/user_schema.js';
 
 
 export const signUp = async (req, res, next) => {
@@ -34,6 +35,10 @@ export const signUp = async (req, res, next) => {
 // login user
 export const login = async (req, res, next) => {
   try {
+    const { error, value } = loginValidator.validate(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
     const { email, userName, password } = req.body;
 
     // Find user by email or username
@@ -71,6 +76,10 @@ export const login = async (req, res, next) => {
 // login user with token
 export const token = async (req, res, next) => {
   try {
+    const { error, value } = loginValidator.validate(req.body);
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
     const { email, userName, password } = req.body;
 
     // Find user by email or username
