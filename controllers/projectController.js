@@ -6,7 +6,10 @@ import { Profile } from "../models/profileModel.js";
 export const addProject = async (req, res) => {
 
     try {
-        const { error, value } = projectSchema.validate(req.body)
+        const { error, value } = projectSchema.validate({
+            ...req.body,
+            image:req.file.filename
+        })
         if (error) {
             return res.status(400).send(error.details[0].message)
         }
@@ -52,14 +55,14 @@ export const getAllUserProject = async (req, res, next) => {
 
 };
 
-export const getOneProject = async (req, res, next) => {
-    try {
-        const oneProject = await Project.findById(req.params.id)
-        res.status(200).json(oneProject)
-    } catch (error) {
-        next(error)
-    }
-};
+// export const getOneProject = async (req, res, next) => {
+//     try {
+//         const oneProject = await Project.findById(req.params.id)
+//         res.status(200).json(oneProject)
+//     } catch (error) {
+//         next(error)
+//     }
+// };
 
 // Update Project
 export const patchProject = async (req, res) => {
