@@ -7,7 +7,6 @@ const projectSchema = new Schema(
             projectName: {type: String},
             description: {type: String},
             contributors: {type: String},
-            skills: {type: String},
             nameOfInstitution: {type: String},
             startDate: {type: String},
             endDate: {type: String},
