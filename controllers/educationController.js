@@ -10,11 +10,8 @@ export const addEducation = async (req, res) => {
             return res.status(400).send(error.details[0].message)
         }
 
-
-
         //after, find the user with the id that you passed when creating the education 
         console.log('userId', req.session.user.id)
-
 
         const userId = req.session?.user?.id || req?.user?.id
 
@@ -82,8 +79,6 @@ export const updateUserEducation = async (req, res) => {
 
 export const deleteUserEducation = async (req, res) => {
     try {
-
-
         const userId = req.session?.user?.id || req?.user?.id;
         const user = await User.findById(userId);
         if (!user) {

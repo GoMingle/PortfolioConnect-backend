@@ -151,27 +151,29 @@ export const getUser = async (req, res, next) => {
 
     return res.status(200).json({ user: userDetails });
   } catch (error) {
-    next()
+    next(error);
   }
 };
 
-export const getUsers = async (req, res) => {
+export const getUsers = async (req, res, next) => {
+  try {
+    const email = req.query.email?.toLowerCase()
+    const userName = req.query.userName?.toLowerCase();
 
+    const filter = {};
+    if (email) {
+      filter.email = email;
+    }
+    if (userName) {
+      filter.userName = userName;
+    }
 
-  const email = req.query.email?.toLowerCase()
-  const userName = req.query.userName?.toLowerCase();
+    const users = await User.find(filter);
 
-  const filter = {};
-  if (email) {
-    filter.email = email;
+    return res.status(200).json({ users });
+  } catch (error) {
+    next(error);
   }
-  if (userName) {
-    filter.userName = userName;
-  }
-
-  const users = await User.find(filter);
-
-  return res.status(200).json({ users });
 };
 
 

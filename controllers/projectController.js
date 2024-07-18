@@ -33,14 +33,13 @@ export const addProject = async (req, res) => {
         res.status(201).json({ project })
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return res.status(500).send(error)
     }
 };
 
 
 export const getAllUserProject = async (req, res, next) => {
-
     try {
         // get all project that belongs to a particular user
         const userId = req.session?.user?.id || req?.user?.id
@@ -98,6 +97,5 @@ export const deleteOneProject = async (req, res, next) => {
         res.status(200).json(deleteProject);
     } catch (error) {
         next(error)
-
     }
 };

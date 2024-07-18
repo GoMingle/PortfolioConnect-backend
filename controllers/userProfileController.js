@@ -3,7 +3,6 @@ import { User } from "../models/user_model.js";
 import { profileSchema } from "../schema/profile_schema.js";
 
 export const createUserProfile = async (req, res) => {
-
     try {
         const { error, value } = profileSchema.validate({
             ...req.body,
@@ -37,7 +36,7 @@ export const createUserProfile = async (req, res) => {
 
 
     } catch (error) {
-        console.log(error);
+        return res.status(500).send(error)
     }
 }
 
@@ -66,7 +65,7 @@ export const updateUserProfile = async (req, res) => {
 
         res.status(201).json({ profile });
     } catch (error) {
-        console.log(error);
+        return res.status(500).send(error)
     }
 };
 
