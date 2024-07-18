@@ -25,7 +25,10 @@ export const createUserExperience = async (req, res) => {
 
     await user.save();
 
-    res.status(201).json({ experience });
+    res.status(201).json({ 
+      message: 'Experience added successfully',
+      experience: experience 
+    });
   } catch (error) {
     return res.status(500).send(error);
   }
@@ -38,9 +41,9 @@ export const getAllUserExperience = async (req, res) => {
     //we are fetching Experience that belongs to a particular user
     const userId = req.session?.user?.id || req?.user?.id
     const allExperience = await Experience.find({ user: userId });
-    if (allExperience.length == 0) {
-      return res.status(200).send({ Experience: allExperience });
-    }
+    // if (allExperience.length == 0) {
+    //   return res.status(200).send({ Experience: allExperience });
+    // }
     res.status(200).json({ Experience: allExperience });
   } catch (error) {
     return res.status(500).json({ error })
@@ -79,7 +82,11 @@ export const updateUserExperience = async (req, res) => {
       return res.status(404).send("experience not found");
     }
 
-    res.status(200).json({ experience });
+    res.status(201).json({ 
+      message: 'Experience updated successfully',
+      experience: experience 
+    });
+
   } catch (error) {
     return res.status(500).json({ error })
   }
@@ -101,7 +108,9 @@ export const deleteUserExperience = async (req, res) => {
 
     user.experiences.pull(req.params.id);
     await user.save();
-    res.status(200).json("Experience deleted");
+    res.status(201).json({ 
+      message: 'Experience deleted successfully'
+    });
   } catch (error) {
     return res.status(500).json({ error })
   }
