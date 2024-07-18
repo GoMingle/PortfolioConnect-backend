@@ -39,7 +39,7 @@ export const getAllUserAchievements = async (req, res) => {
 
   try {
     //we are fetching achievement that belongs to a particular user
-    const userId = req.session.user.id
+    const userId = req.session?.user?.id || req?.user?.id;
     const allachievement = await Achievement.find({ user: userId })
     // if (allachievement.length == 0) {
     //   return res.status(200).send({ achievement: allachievement })
