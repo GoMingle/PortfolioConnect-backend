@@ -22,13 +22,20 @@ export const createUserProfile = async (req, res) => {
             return res.status(404).send("User not found");
         }
 
+        // Check if user profile exit
+        if (user.userProfile) {
+            return res.status(404).send("Sorry, There can be only one instance of USER PROFILE");
+        }
+
         const profile = await Profile.create({ ...value, user: userId });
 
         user.userProfile = profile._id;
 
         await user.save();
 
-        res.status(201).json({ profile });
+        return res.status(201).json({ profile });
+
+
     } catch (error) {
         console.log(error);
     }
