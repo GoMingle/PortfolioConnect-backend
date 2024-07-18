@@ -29,7 +29,10 @@ export const addEducation = async (req, res) => {
         await user.save();
 
         //return the education
-        res.status(201).json({ education })
+        res.status(201).json({ 
+            message: 'Education added successfully',
+            education: education 
+          });
 
     } catch (error) {
         return res.status(500).send(error)
@@ -42,9 +45,9 @@ export const getAllUserEducation = async (req, res, next) => {
         //we are fetching education that belongs to a particular user
         const userId = req.session?.user?.id || req?.user?.id
         const alleducation = await Education.find({ user: userId });
-        if (alleducation.length == 0) {
-            return res.status(200).send({ education: alleducation })
-        }
+        // if (alleducation.length == 0) {
+        //     return res.status(200).send({ education: alleducation })
+        // }
         res.status(200).json({ education: alleducation })
     } catch (error) {
         next(error)
@@ -78,12 +81,16 @@ export const updateUserEducation = async (req, res) => {
             return res.status(404).send("User not found");
         }
 
-        const Education = await Education.findByIdAndUpdate(req.params.id, value, { new: true });
-        if (!Education) {
+        const education = await Education.findByIdAndUpdate(req.params.id, value, { new: true });
+        if (!education) {
             return res.status(404).send("Education not found");
         }
 
-        res.status(201).json({ Education });
+        res.status(201).json({ 
+            message: 'Education updated successfully',
+            education: education 
+          });
+        
     } catch (error) {
         return res.status(500).json({ error })
     }
@@ -105,7 +112,9 @@ export const deleteUserEducation = async (req, res) => {
 
         user.education.pull(req.params.id);
         await user.save();
-        res.status(200).json("Education deleted");
+        res.status(201).json({ 
+            message: 'Education deleted successfully'
+          });
     } catch (error) {
         return res.status(500).json({ error })
     }
