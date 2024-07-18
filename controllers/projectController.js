@@ -45,7 +45,7 @@ export const getAllUserProject = async (req, res, next) => {
         const userId = req.session?.user?.id || req?.user?.id
         const allProject = await Project.find({ user: userId })
         if (allProject.length == 0) {
-            return res.status(404).send('No project added')
+            return res.status(200).send({ project: allProject })
         }
         res.status(200).json({ project: allProject })
     } catch (error) {
@@ -54,14 +54,18 @@ export const getAllUserProject = async (req, res, next) => {
 
 };
 
-// export const getOneProject = async (req, res, next) => {
-//     try {
-//         const oneProject = await Project.findById(req.params.id)
-//         res.status(200).json(oneProject)
-//     } catch (error) {
-//         next(error)
-//     }
-// };
+export const getOneProject = async (req, res, next) => {
+    try {
+        const oneProject = await Project.findById(req.params.id)
+        if (!oneProject) {
+          return res.status(200).send({ project: oneProject });
+        }
+        res.status(200).json({ project: oneProject })
+    } catch (error) {
+        next(error)
+    }
+  };
+
 
 // Update Project
 export const patchProject = async (req, res) => {

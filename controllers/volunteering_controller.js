@@ -38,13 +38,26 @@ export const getAllUserVolunteering = async (req, res) => {
         const userId = req.session?.user?.id || req?.user?.id;
         const allVolunteering = await Volunteering.find({ user: userId });
         if (allVolunteering.length == 0) {
-          return res.status(404).send("No Volunteering added");
+          return res.status(200).send({ Volunteerings: allVolunteering });
         }
         res.status(200).json({ Volunteerings: allVolunteering });
       } catch (error) {
         return res.status(500).json({ error });
       }
 }
+
+export const getOneVolunteering = async (req, res, next) => {
+  try {
+      const oneVolunteering = await Volunteering.findById(req.params.id)
+      if (!oneVolunteering) {
+        return res.status(200).send({ volunteering: oneVolunteering });
+      }
+      res.status(200).json({ volunteering: oneVolunteering })
+  } catch (error) {
+      next(error)
+  }
+};
+
 
 export const updateUserVolunteering = async (req, res) => {
     try {
