@@ -8,7 +8,7 @@ export const addProject = async (req, res) => {
     try {
         const { error, value } = projectSchema.validate({
             ...req.body,
-            image:req.file.filename
+            image:req.file?.filename
         })
         if (error) {
             return res.status(400).send(error.details[0].message)
@@ -73,7 +73,7 @@ export const getOneProject = async (req, res, next) => {
 // Update Project
 export const patchProject = async (req, res) => {
     try {
-      const { error, value } = projectSchema.validate({...req.body, image:req.file.filename});
+      const { error, value } = projectSchema.validate({...req.body, image:req.file?.filename});
 
   
       if (error) {
