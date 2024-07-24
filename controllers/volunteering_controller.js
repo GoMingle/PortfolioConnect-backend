@@ -113,7 +113,6 @@ export const updateUserVolunteering = async (req, res) => {
   
       return res.status(201).json({ 
         message: 'Volunteering deleted successfully',
-        volunteering: volunteering 
       });
     } catch (error) {
       return res.status(500).json({ error });
