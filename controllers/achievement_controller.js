@@ -6,7 +6,7 @@ export const createUserAchievement = async (req, res, next) => {
   try {
     const { error, value } = achievementSchema.validate({
       ...req.body,
-      image: req.file.filename
+      image: req.file?.filename
     });
 
     if (error) {
@@ -68,7 +68,7 @@ export const updateUserAchievement = async (req, res, next) => {
   try {
     const { error, value } = achievementSchema.validate({
       ...req.body,
-      image: req.file.filename
+      image: req.file?.filename
     });
 
 

@@ -21,7 +21,7 @@ export const addEducation = async (req, res) => {
         }
 
         //create education with the value
-        const education = await Education.create({ ...value, user: userId });
+        const education = await Education.create({ ...value, user: user });
         //if you find the user, push the education id you just created inside
         user.education.push(education._id);
 
