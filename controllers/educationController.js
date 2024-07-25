@@ -11,7 +11,6 @@ export const addEducation = async (req, res) => {
         }
 
         //after, find the user with the id that you passed when creating the education 
-        console.log('userId', req.session.user.id)
 
         const userId = req.session?.user?.id || req?.user?.id
 
@@ -21,7 +20,7 @@ export const addEducation = async (req, res) => {
         }
 
         //create education with the value
-        const education = await Education.create({ ...value, user: user });
+        const education = await Education.create({ ...value, user: userId });
         //if you find the user, push the education id you just created inside
         user.education.push(education._id);
 
@@ -44,11 +43,11 @@ export const getAllUserEducation = async (req, res, next) => {
     try {
         //we are fetching education that belongs to a particular user
         const userId = req.session?.user?.id || req?.user?.id
-        const alleducation = await Education.find({ user: userId });
+        const allEducation = await Education.find({ user: userId });
         // if (alleducation.length == 0) {
         //     return res.status(200).send({ education: alleducation })
         // }
-        res.status(200).json({ education: alleducation })
+        res.status(200).json({ education: allEducation })
     } catch (error) {
         next(error)
     }
