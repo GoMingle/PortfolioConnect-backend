@@ -101,14 +101,25 @@ export const patchProject = async (req, res) => {
   };
 
 // Delete a Project
-export const deleteOneProject = async (req, res, next) => {
-    try {
-        const deleteProject = await Project.findByIdAndDelete(req.params.id);
-        res.status(200).json(deleteProject);
-        res.status(201).json({ 
-            message: 'Project deleted successfully'
-          });
-    } catch (error) {
-        next(error)
+export const deleteUserProject = async (req, res) => {
+  try {
+   
+
+    const userId = req.session?.user?.id || req?.user.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
     }
+
+    const project = await Project.findByIdAndDelete(req.params.id);
+      if (!project) {
+          return res.status(404).send("Project not found");
+      }
+
+      user.projects.pull(req.params.id);
+      await user.save();
+    res.status(200).json("Project deleted");
+  } catch (error) {
+    return res.status(500).json({error})
+  }
 };
