@@ -39,7 +39,7 @@ export const login = async (req, res, next) => {
     if (error) {
       return res.status(400).send(error.details[0].message);
     }
-    const { email, userName, password } = req.body;
+    const { email, userName, password } = value;
 
     // Find user by email or username
     const user = await User.findOne({
@@ -127,6 +127,7 @@ export const token = async (req, res, next) => {
 export const getUser = async (req, res, next) => {
   try {
     const userName = req.params.userName.toLowerCase();
+    console.log(userName);
 
     const options = { sort: { startDate: -1 } }
     const userDetails = await User.findOne({ userName }).select("-password")
