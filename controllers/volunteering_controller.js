@@ -26,7 +26,7 @@ export const createUserVolunteering = async (req, res) => {
     
         await user.save();
     
-        return res.status(201).json({ 
+        res.status(201).json({ 
           message: 'Volunteering created successfully',
           volunteering: volunteering 
         });
