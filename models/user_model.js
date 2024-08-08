@@ -14,7 +14,7 @@ import { toJSON } from "@reis/mongoose-to-json";
         skills: [{ type: Types.ObjectId, ref: 'Skills' }],
         achievements: [{ type: Types.ObjectId, ref: 'Achievement' }],
         projects: [{ type: Types.ObjectId, ref: 'Project' }],
-        userProfile: { type: Types.ObjectId, ref: 'UserProfile' },
+        userProfile: { type: Types.ObjectId, ref: 'Profile' },
         volunteering: [{ type: Types.ObjectId, ref: 'Volunteering' }],
         experiences: [{ type: Types.ObjectId, ref: 'Experience' }]
     
