@@ -78,7 +78,10 @@ export const updateUserProfile = async (req, res) => {
 export const getUserProfile = async (req, res) => {
     try {
         const userId = req.session?.user?.id || req?.user?.id;
-        const profile = await Profile.find({ user: userId });
+        const profile = await Profile.findOne({ user: userId }).populate({
+            path: 'User',
+            select: '-password'
+        });
         if (!profile) {
             return res.status(404).send("No profile added");
         }
